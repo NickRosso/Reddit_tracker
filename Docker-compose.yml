@@ -1,0 +1,48 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  celery-beat:
+    build: .
+    command: celery -A superstonk_activity beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+    - .:/code
+    depends_on:
+    - db
+
+  celery-worker:
+    build: .
+    command: celery -A superstonk_activity worker -B
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+        - '6379'
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+
+volumes:
+    redisdata:

@@ -1,0 +1,9 @@
+Django>=3.2
+redis
+requests
+psycopg2-binary>=2.8
+django-celery-beat>=2.2.0
+beautifulsoup4>=4.9.3
+djangorestframework
+markdown
+django-filter
