@@ -16,5 +16,5 @@ class ListActivity(generics.ListAPIView):
         queryset = Activity_metrics.objects.all()
         subreddit = self.request.query_params.get('subreddit')
         if subreddit is not None:
-            queryset = queryset.filter(Subreddit__contains=subreddit)
+            queryset = queryset.filter(Subreddit__contains=subreddit).order_by('Created_date')
         return queryset
