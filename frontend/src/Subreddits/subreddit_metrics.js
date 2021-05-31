@@ -15,8 +15,11 @@ import {
     Area,
   } from 'recharts';
 
-export default class Home extends Component {
-    url = 'http://localhost:8000/subreddit_activity/?subreddit=https://www.reddit.com/r/Superstonk/'
+export default class Subreddit_Metrics extends Component {
+    constructor(props) {
+      super(props);
+  }
+    url = 'http://localhost:8000/subreddit_activity/?subreddit=' + this.props.location.state.sub_url
     thirty_minutes_url = this.url + '&timespan=30'
     sixty_minutes_url = this.url + '&timespan=60'
     four_hour_url = this.url + '&timespan=240'
@@ -27,9 +30,6 @@ export default class Home extends Component {
         error: null,
     }
 
-    constructor(props) {
-        super(props);
-    }
 
 fetch_metrics(url) {
     fetch(url)
@@ -74,7 +74,7 @@ render() {
     return (
         <div style={{ width: '100%' }}>
         <Container style={{ marginTop: '100px' }}>
-        <h4>Superstonk Metrics</h4>
+        <h4>{this.props.location.state.sub_url}</h4>
         <LineChart
           width={1000}
           height={200}

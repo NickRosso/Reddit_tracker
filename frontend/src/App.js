@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Route, Switch ,Link, BrowserRouter as Router } from 'react-router-dom';
-import Home from './Subreddits/Home';
+import Subreddit_Metrics from './Subreddits/subreddit_metrics';
+import Subreddit_List from './Subreddits/Subreddit_list';
 // import About from './Subreddits/About';
 // import Portfolio from './Subreddits/Portfolio';
 import Navbar from 'react-bootstrap/Navbar'
@@ -23,7 +24,8 @@ function App() {
          </Navbar.Collapse>
        </Navbar>
        <Switch>
-         <Route exact path="/" component={Home} />
+       <Route exact path="/" component={Subreddit_List} />
+         <Route exact path="/Metrics" component={Subreddit_Metrics} />
          {/* <Route path="/about" component={About} />
          <Route path="/portfolio" component={Portfolio} /> */}
 

@@ -1,9 +1,10 @@
 from django.shortcuts import render
 import datetime
-from subreddit_metrics.models import Activity_metrics
-from subreddit_metrics.serializers import Activity_metrics_Serializer
+from subreddit_metrics.models import Activity_metrics, Subreddit
+from subreddit_metrics.serializers import Activity_metrics_Serializer, Subreddit_Serializer
 from rest_framework.views import APIView
 from rest_framework import generics
+from rest_framework import viewsets
 from rest_framework.response import Response
 
 class ListActivity(generics.ListAPIView):
@@ -25,3 +26,10 @@ class ListActivity(generics.ListAPIView):
             else:
                 queryset = queryset.filter(Subreddit__contains=subreddit).order_by('Created_date')
         return queryset
+
+class SubredditViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing user instances.
+    """
+    serializer_class = Subreddit_Serializer
+    queryset = Subreddit.objects.all()

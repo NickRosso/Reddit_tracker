@@ -17,11 +17,14 @@ from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
 from django.contrib import admin
 from django.urls import path
-from subreddit_metrics import views as subreddit_metric_views
+from subreddit_metrics.views import ListActivity
+from subreddit_metrics.views import SubredditViewSet
+
 
 router = routers.DefaultRouter()
+router.register(r'Subreddits', SubredditViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('subreddit_activity/', subreddit_metric_views.ListActivity.as_view()),
-]
+    path('subreddit_activity/', ListActivity.as_view()),
+] + router.urls
