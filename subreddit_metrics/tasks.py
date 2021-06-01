@@ -3,7 +3,7 @@ import requests
 import csv
 import time
 from bs4 import BeautifulSoup
-from subreddit_metrics.models import Activity_metrics
+from subreddit_metrics.models import Activity_metrics, Subreddit
 from superstonk_activity.celery import app
 
 def convert_str_to_number(x):
@@ -18,19 +18,21 @@ def convert_str_to_number(x):
 
 @app.task(bind=True)
 def get_subreddit_metrics(self):
-    subreddits = ["https://www.reddit.com/r/Superstonk/", "https://www.reddit.com/r/wallstreetbets/", "https://www.reddit.com/r/GME/" ]
-    headers = {'User-Agent': 'Mozilla/5.0'}
     #Getting GME price
     url = "https://www.google.com/search?q=gme"
+    headers = {'User-Agent': 'Mozilla/5.0'}
     page = requests.get(url, headers=headers)
     soup = BeautifulSoup(page.text, 'html.parser')
     price_element = soup.find("div", class_="BNeawe iBp4i AP7Wnd")
     for span_tag in price_element.find('span'):
         span_tag.replace_with('')
 
-    for subreddit in subreddits:
-        page = requests.get(subreddit, headers=headers)
+    Subreddits_objects = Subreddit.objects.all()
+    for sub in Subreddits_objects:
+        page = requests.get(sub.Subreddit_Link, headers=headers)
         soup = BeautifulSoup(page.text, 'html.parser')
         online_count = soup.find_all("div", class_="_3XFx6CfPlg-4Usgxm0gK8R")
-        new_metric = Activity_metrics.objects.create(Total_members=convert_str_to_number(online_count[0].text), Online_members=convert_str_to_number(online_count[1].text), Subreddit=subreddit, Price=price_element.text)
+        new_metric = Activity_metrics.objects.create(Total_members=convert_str_to_number(online_count[0].text), Online_members=convert_str_to_number(online_count[1].text), Subreddit=sub.Subreddit_Link, Price=price_element.text)
         new_metric.save()
+        sub.Activity_metrics.add(new_metric)
+        sub.save()

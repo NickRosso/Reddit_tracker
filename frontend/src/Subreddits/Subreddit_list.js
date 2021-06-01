@@ -4,7 +4,6 @@ import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-const axios = require('axios');
 
 export default class Subreddit_List extends Component {
 state = {

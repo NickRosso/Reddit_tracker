@@ -11,8 +11,6 @@ import {
     Tooltip,
     Legend,
     Brush,
-    AreaChart,
-    Area,
   } from 'recharts';
 
 export default class Subreddit_Metrics extends Component {
@@ -88,37 +86,37 @@ render() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Created_date" />
+          <XAxis dataKey="Created_date" tick={false} />
           <YAxis domain={['dataMin', 'dataMax']}/>
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="Online_members" stroke="#8884d8" />
-        </LineChart>
-        </Container>
-
-        <Container width="80%" height={200}>
-        <LineChart
-          width={1000}
-          height={200}
-          data={this.state.metric}
-          syncId="anyId"
-          margin={{
-            top: 5,
-            right: 30,
-            left: 30,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Created_date" />
-          <YAxis domain={['dataMin', 'dataMax']}/>
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Total_members" stroke="#82ca9d" />
           <Brush />
         </LineChart>
         </Container>
 
+        <Container width="80%" height={200}>
+        <LineChart
+          width={1000}
+          height={200}
+          data={this.state.metric}
+          syncId="anyId"
+          margin={{
+            top: 5,
+            right: 30,
+            left: 30,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="Created_date" tick={false}/>
+          <YAxis domain={['dataMin', 'dataMax']}/>
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="Total_members" stroke="#82ca9d" />
+        </LineChart>
+        </Container>
+
 
         <Container width="80%" height={200}>
         <LineChart
@@ -134,7 +132,7 @@ render() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="Created_date" />
+          <XAxis dataKey="Created_date" tick={false} />
           <YAxis domain={['dataMin', 'dataMax']} />
           <Tooltip />
           <Legend />
@@ -154,7 +152,7 @@ render() {
         </React.Fragment>
         </Container>
     <Container width="80%" height={100}>
-       <Table striped bordered hover>
+       {/* <Table striped bordered hover>
           <thead>
             <tr>
               <th>Date Created</th>
@@ -180,7 +178,7 @@ render() {
               <tr><td>"LOADING"</td></tr>
               }
            </tbody>
-        </Table>
+        </Table> */}
     </Container>
     </div>
     );
