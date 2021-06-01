@@ -1,7 +1,6 @@
 This project was a quick way to start tracking Subreddit online users/ total members. We leverage Celery, Django, BS4, React, and Recharts to create these visualizations.
 
 #Setup
-- Docker desktop
 ''' 
 docker-compose build
 docker-compose up
