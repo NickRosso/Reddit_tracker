@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './rocket_logo.png';
 import './App.css';
 import { Route, Switch ,Link, BrowserRouter as Router } from 'react-router-dom';
 import Subreddit_Metrics from './Subreddits/subreddit_metrics';
@@ -13,7 +13,9 @@ function App() {
   return (
     <Router>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/">Subtrack</Navbar.Brand>
+        <Navbar.Brand href="/">
+        <img src={logo} style={{width:25, marginTop: -7}} />
+        Subtrack</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
