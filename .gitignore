@@ -1,2 +1,4 @@
-data
+data/
 celerybeat-schedule
+*.pyc
+__pycache__/
