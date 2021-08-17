@@ -4,49 +4,43 @@ services:
   db:
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - .back-end-api/data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
-    build: .
+  api:
+    build: back-end-api/.
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./back-end-api:/code
     ports:
       - "8000:8000"
     depends_on:
       - db
 
   frontend:
-    container_name: frontend
-    build:
-        context: ./frontend
-        dockerfile: Dockerfile
+    container_name: front-end-tracker
+    build: ./front-end-tracker
     volumes:
-      - './frontend:/app'
-      - '/app/node_modules'
+      - './front-end-tracker:/app'
       
     ports:
         - 3000:3000
-    environment:
-        - CHOKIDAR_USEPOLLING=true
-    stdin_open: true
 
   celery-beat:
-    build: .
+    build: back-end-api/.
     command: celery -A superstonk_activity beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
     volumes:
-    - .:/code
+    - ./back-end-api/:/code
     depends_on:
     - db
 
   celery-worker:
-    build: .
+    build: back-end-api/.
     command: celery -A superstonk_activity worker -B
     volumes:
-      - .:/code
+      - ./back-end-api/:/code
     depends_on:
       - db
 
