@@ -90,7 +90,7 @@ render() {
           <YAxis domain={['dataMin', 'dataMax']}/>
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="Online_members" stroke="#8884d8" dot={false}/>
+          <Line type="monotone" dataKey="Online_members" stroke="#8884d8" />
           <Brush />
         </LineChart>
         </Container>
@@ -113,7 +113,7 @@ render() {
           <YAxis domain={['dataMin', 'dataMax']}/>
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="Total_members" stroke="#82ca9d" dot={false}/>
+          <Line type="monotone" dataKey="Total_members" stroke="#82ca9d" />
         </LineChart>
         </Container>
 
@@ -136,19 +136,19 @@ render() {
           <YAxis domain={['dataMin', 'dataMax']} />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="Price" stroke="#26dc2c" dot={false}/>
+          <Line type="monotone" dataKey="Price" stroke="#26dc2c" />
         </LineChart>
         <React.Fragment>
-            <Button onClick={this.thirty_minute_chart}
-            variant="outline-secondary">30m</Button>{' '}
-            <Button onClick={this.sixty_minute_chart}
-            variant="outline-secondary">1hr</Button>{' '}
-            <Button onClick={this.four_hour_chart}
-            variant="outline-secondary">4hr</Button>{' '}
-            <Button onClick={this.twenty_four_hour_chart}
-            variant="outline-secondary">24hr</Button>{' '}
-            <Button onClick={this.all_time_chart}
-            variant="outline-secondary">All</Button>{' '}
+            <Button onClick={this.thirty_minute_chart} className='nextBtn' 
+            variant="primary">30m</Button>{' '}
+            <Button onClick={this.sixty_minute_chart} className='nextBtn' 
+            variant="primary">1hr</Button>{' '}
+            <Button onClick={this.four_hour_chart} className='nextBtn' 
+            variant="primary">4hr</Button>{' '}
+            <Button onClick={this.twenty_four_hour_chart} className='nextBtn' 
+            variant="primary">24hr</Button>{' '}
+            <Button onClick={this.all_time_chart} className='nextBtn' 
+            variant="primary">All</Button>{' '}
         </React.Fragment>
         </Container>
     <Container width="80%" height={100}>
