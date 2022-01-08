@@ -1,3 +1,7 @@
-data
+psqldata
 celerybeat-schedule
+.back-end-api
+back-end-api
 *.pyc
+app
+__pycache__.pyc
